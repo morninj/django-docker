@@ -54,11 +54,18 @@ You should be inside the `django-docker` folder, which contains the `Dockerfile`
 
 Here's the outline of the workflow:
 
-    1. Run the Docker container and mount the local directory containing the Django project code
-    2. Make changes and test them on the container
-    3. Commit the changes to the Git repo
-    4. Rebuild the Docker image
-    5. Push the Docker image to Docker Hub
+    1. Set a root password for the Django project
+    2. Run the Docker container and mount the local directory containing the Django project code
+    3. Make changes and test them on the container
+    4. Commit the changes to the Git repo
+    5. Rebuild the Docker image
+    6. Push the Docker image to Docker Hub
+
+Create a password for the Django project root user. This will be a Django user with superuser permissions and a username of `root`. Copy the sample file:
+
+    $ cp root_password.sample root_password
+
+Edit `root_password` and replace the contents with your root password. Make it strong and don't share it. (By default, the `.gitignore` file excludes `root_password` from the repo. If you don't want a Django superuser, you can comment out that line in the Dockerfile.)
 
 Start the Docker container:
 
@@ -72,6 +79,8 @@ Here's what the flags do:
 * `--env DJANGO_PRODUCTION=false`: Production settings are enabled by default in `settings.py` and defined in `settings_production.py`. This prevents `settings_production.py` from being loaded, which lets you have separate settings for local development (e.g., `DEBUG = True` and a local development database).
 
 Point your browser to your Docker host's IP address. You should see the "Hello, world!" message again.
+
+Point your browser to http://<ip address>/admin/. You should be able to log in with username `root` and the root password you set earlier.
 
 In your editor of choice, open `django_docker/hello_world/templates/hello_world/index.html`. It looks like this:
 
