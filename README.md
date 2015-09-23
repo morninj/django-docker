@@ -2,6 +2,8 @@
 
 This repo has everything you need to develop and deploy Django projects with Docker. If there's an improvement you'd like to see, feel free to add an issue or open a pull request.
 
+You can also pull this image from Docker Hub as [`morninj/django-docker`](https://hub.docker.com/r/morninj/django-docker/).
+
 I've tested this configuration on Mac OS X 10.10.3 and Ubuntu 14.04.
 
 ## Get started
