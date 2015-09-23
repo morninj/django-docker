@@ -47,3 +47,55 @@ The output of `docker ps` should now be empty:
 
     $ docker ps
     CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+
+## Development workflow
+
+You should be inside the `django-docker` folder, which contains the `Dockerfile` and this README.
+
+Here's the outline of the workflow:
+
+    1. Run the Docker container and mount the local directory containing the Django project code
+    2. Make changes and test them on the container
+    3. Commit the changes to the Git repo
+    4. Rebuild the Docker image
+    5. Push the Docker image to Docker Hub
+
+Start the Docker container and mount the local directory:
+
+    docker run -d -p 80:80 -v $(pwd):/code <yourname>/django-docker
+
+Point your browser to your Docker host's IP address. You should see the "Hello, world!" message again.
+
+In your editor of choice, open `django_docker/hello_world/templates/hello_world/index.html`. It looks like this:
+
+    {% extends 'base.html' %}
+
+    {% load staticfiles %}
+
+    {% block content %}
+    <p class="hello-world">Hello, world!</p>
+    {% endblock content %} 
+
+Edit the `<p>` tag to read `Hello again, world!` and save the file. Refresh the page in your browser and you should see the updated message.
+
+Next, commit this change to your repo and push it:
+
+    $ git commit -am 'Add "Hello, again, world!"'
+    $ git push origin master
+
+Run `docker ps` to get the `CONTAINER ID` and use `docker kill` to stop the container:
+
+    $ docker ps
+    CONTAINER ID        IMAGE                   COMMAND                  CREATED             STATUS              PORTS                          NAMES
+    39b60b7eb954        morninj/django-docker   "/usr/bin/supervisord"   4 minutes ago       Up 3 minutes        0.0.0.0:80->80/tcp, 8000/tcp   elegant_banach
+    $ docker kill 39b60b7eb954
+
+Rebuild the container with the updated code:
+
+    $ docker build -t <yourname>/django-docker .
+
+Push it to Docker Hub:
+
+    $ docker push <yourname>/django-docker
+
+If you want, you can use the Docker Hub web interface to make this image private.
