@@ -2,7 +2,7 @@
 
 This repo has everything you need to develop and deploy Django projects with Docker. If there's an improvement you'd like to see, feel free to add an issue or open a pull request.
 
-I've tested this configuration on Mac OS X 10.10.3 and Ubuntu 14.04. It should work equally well on other platforms.
+I've tested this configuration on Mac OS X 10.10.3 and Ubuntu 14.04.
 
 ## Get started
 
