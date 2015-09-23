@@ -10,6 +10,7 @@ First, [install Docker](https://docs.docker.com/installation/). If you're new to
 
 Next, clone this repo:
 
-    git@github.com:morninj/django-docker.git
+    git clone git@github.com:morninj/django-docker.git
+    cd django-docker
 
 (Mac users should clone it to a directory under `/Users` because of a [Docker bug](https://blog.docker.com/2014/10/docker-1-3-signed-images-process-injection-security-options-mac-shared-directories/) involving Mac shared directories.)
