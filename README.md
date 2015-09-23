@@ -29,7 +29,7 @@ Run the Docker image you just created:
 
 Run `docker ps` to verify that the Docker container is running:
 
-    CONTAINER ID        IMAGE                   COMMAND                  CREATED             STATUS              PORTS                          NAMES
+    CONTAINER ID        IMAGE                      COMMAND                  CREATED             STATUS              PORTS                          NAMES
     2830610e8c87        <yourname>/django-docker   "/usr/bin/supervisord"   25 seconds ago      Up 25 seconds       0.0.0.0:80->80/tcp, 8000/tcp   focused_banach
 
 You should now be able to access the running app through a web browser. Run `docker-machine ls` to get the local IP address for your Docker host:
