@@ -1,4 +1,7 @@
 FROM ubuntu:14.04
+
+ENV DJANGO_PRODUCTION=true
+
 RUN apt-get update -y
 
 RUN echo 'mysql-server mysql-server/root_password password devrootpass' | debconf-set-selections

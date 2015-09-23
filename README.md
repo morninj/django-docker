@@ -60,9 +60,16 @@ Here's the outline of the workflow:
     4. Rebuild the Docker image
     5. Push the Docker image to Docker Hub
 
-Start the Docker container and mount the local directory:
+Start the Docker container:
 
-    $ docker run -d -p 80:80 -v $(pwd):/code <yourname>/django-docker
+    $ docker run -d -p 80:80 -v $(pwd):/code --env DJANGO_PRODUCTION=false <yourname>/django-docker
+
+Here's what the flags do:
+
+* `-d`: Run in detached mode (i.e., Docker will no longer listen to the console where you ran `docker run`).
+* `-p 80:80`: Map port 80 on the host to port 80 on the container. This lets you communicate with Nginx from your browser.
+* `-v $(pwd):/code`: Mount the current directory as a volume at `/code` on the Docker container. This lets you edit the code while the container is running so you can test it without having to rebuild the image.
+* `--env DJANGO_PRODUCTION=false`: Production settings are enabled by default in `settings.py` and defined in `settings_production.py`. This prevents `settings_production.py` from being loaded, which lets you have separate settings for local development (e.g., `DEBUG = True` and a local development database).
 
 Point your browser to your Docker host's IP address. You should see the "Hello, world!" message again.
 
@@ -100,9 +107,11 @@ Push it to Docker Hub:
 
 If you want, you can use the Docker Hub web interface to make this image private.
 
-## Deploying
+## Deployment
 
-*This configuration isn't ready for production. Right now, data is stored in a local MySQL database. That database will be refreshed each time you update your Docker image. This configuration will be updated soon to store production data on a persistent storage backend (like Amazon RDS or Google Cloud SQL).*
+Production settings live in `django_docker/django_docker/settings_production.py`. Edit these as necessary. For instance, you'll probably want to set `ALLOWED_HOSTS` to your production domain, and you'll want to set `DATABASES` to a persistent storage backend (e.g,. Google Cloud SQL or your own database server). See the [Django deployment checklist](https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/).
+
+It's a good idea to run the following steps on a staging server before running them on a production server. The staging server should be identical to the production server (except for its address).
 
 If you don't have a server running yet, start one. An easy and cheap option is the $5/month virtual server from Digital Ocean. They have Ubuntu images with Docker preinstalled.
 
@@ -115,3 +124,5 @@ Run the image:
     $ docker run -d -p 80:80 <yourname>/django-docker
 
 Point a browser to your server's IP address. You should see the latest version of the project.
+
+Verify that your production settings (not the development settings!) are active. Navigate to `http://<ip address>/spamalot`. You should see the basic Nginx "not found" page. If you see the full Django error page, that means that `DEBUG = True`, which probably means that your production settings are not loaded.

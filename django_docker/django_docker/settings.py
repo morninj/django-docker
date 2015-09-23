@@ -116,3 +116,8 @@ TEMPLATES = [
         },
     },
 ]
+
+# Import production settings if the environment variable DJANGO_PRODUCTION is true
+# (It's set to True by default in the Dockerfile, but you can override it with `docker run` for development)
+if os.environ['DJANGO_PRODUCTION'] == 'true':
+    from settings_production import *
