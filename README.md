@@ -109,7 +109,7 @@ If you want, you can use the Docker Hub web interface to make this image private
 
 ## Deployment
 
-Production settings live in `django_docker/django_docker/settings_production.py`. Edit these as necessary. For instance, you'll probably want to set `ALLOWED_HOSTS` to your production domain, and you'll want to set `DATABASES` to a persistent storage backend (e.g,. Google Cloud SQL or your own database server). See the [Django deployment checklist](https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/).
+Production settings live in `django_docker/django_docker/settings_production.py`. Edit these as necessary. For instance, you'll probably want to set `ALLOWED_HOSTS` to your production domain, and you'll want to set `DATABASES` to a persistent storage backend (e.g., Google Cloud SQL or your own database server). See the [Django deployment checklist](https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/).
 
 It's a good idea to run the following steps on a staging server before running them on a production server. The staging server should be identical to the production server (except for its address).
 
