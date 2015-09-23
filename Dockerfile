@@ -14,6 +14,7 @@ EXPOSE 80 8000
 WORKDIR /code/django_docker
 RUN python manage.py collectstatic --noinput
 RUN python manage.py syncdb --noinput
+RUN python manage.py migrate --noinput
 RUN ln -s /code/nginx.conf /etc/nginx/sites-enabled/django_docker.conf
 RUN rm /etc/nginx/sites-enabled/default
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
