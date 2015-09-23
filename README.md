@@ -10,7 +10,7 @@ First, [install Docker](https://docs.docker.com/installation/). If you're new to
 
 Next, clone this repo:
 
-    $ git clone git@github.com:morninj/django-docker.git
+    $ git clone git@github.com:<yourname>/django-docker.git
     $ cd django-docker
 
 (Mac users should clone it to a directory under `/Users` because of a [Docker bug](https://blog.docker.com/2014/10/docker-1-3-signed-images-process-injection-security-options-mac-shared-directories/) involving Mac shared directories.)
@@ -25,12 +25,12 @@ Build the Docker image (you should be in the `django-docker/` directory, which c
 
 Run the Docker image you just created:
 
-    $ docker run -d -p 80:80 morninj/django-docker
+    $ docker run -d -p 80:80 <yourname>/django-docker
 
 Run `docker ps` to verify that the Docker container is running:
 
     CONTAINER ID        IMAGE                   COMMAND                  CREATED             STATUS              PORTS                          NAMES
-    2830610e8c87        morninj/django-docker   "/usr/bin/supervisord"   25 seconds ago      Up 25 seconds       0.0.0.0:80->80/tcp, 8000/tcp   focused_banach
+    2830610e8c87        <yourname>/django-docker   "/usr/bin/supervisord"   25 seconds ago      Up 25 seconds       0.0.0.0:80->80/tcp, 8000/tcp   focused_banach
 
 You should now be able to access the running app through a web browser. Run `docker-machine ls` to get the local IP address for your Docker host:
 
@@ -93,8 +93,8 @@ Next, commit this change to your repo and push it:
 Run `docker ps` to get the `CONTAINER ID` and use `docker kill` to stop the container:
 
     $ docker ps
-    CONTAINER ID        IMAGE                   COMMAND                  CREATED             STATUS              PORTS                          NAMES
-    39b60b7eb954        morninj/django-docker   "/usr/bin/supervisord"   4 minutes ago       Up 3 minutes        0.0.0.0:80->80/tcp, 8000/tcp   elegant_banach
+    CONTAINER ID        IMAGE                      COMMAND                  CREATED             STATUS              PORTS                          NAMES
+    39b60b7eb954        <yourname>/django-docker   "/usr/bin/supervisord"   4 minutes ago       Up 3 minutes        0.0.0.0:80->80/tcp, 8000/tcp   elegant_banach
     $ docker kill 39b60b7eb954
 
 Rebuild the container with the updated code:
