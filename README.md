@@ -102,7 +102,7 @@ If you want, you can use the Docker Hub web interface to make this image private
 
 ## Deploying
 
-*This configuration isn't ready for production. Right now, data is stored in a local SQLite database. That database will be refreshed each time you update your Docker image. This configuration will be updated soon to store production data on a persistent storage backend (like Amazon RDS or Google Cloud SQL).*
+*This configuration isn't ready for production. Right now, data is stored in a local MySQL database. That database will be refreshed each time you update your Docker image. This configuration will be updated soon to store production data on a persistent storage backend (like Amazon RDS or Google Cloud SQL).*
 
 If you don't have a server running yet, start one. An easy and cheap option is the $5/month virtual server from Digital Ocean. They have Ubuntu images with Docker preinstalled.
 
