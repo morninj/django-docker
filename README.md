@@ -1,6 +1,6 @@
 # django-docker
 
-This repo has everything you need to develop and deploy Django projects with Docker. It's being actively developed. If there's an improvement you'd like to see, feel free to add an issue or open a pull request.
+This repo has everything you need to develop and deploy Django projects with Docker. If there's an improvement you'd like to see, feel free to add an issue or open a pull request.
 
 I've tested this configuration on Mac OS X 10.10.3 and Ubuntu 14.04. It should work equally well on other platforms.
 
@@ -62,7 +62,7 @@ Here's the outline of the workflow:
 
 Start the Docker container and mount the local directory:
 
-    docker run -d -p 80:80 -v $(pwd):/code <yourname>/django-docker
+    $ docker run -d -p 80:80 -v $(pwd):/code <yourname>/django-docker
 
 Point your browser to your Docker host's IP address. You should see the "Hello, world!" message again.
 
@@ -80,7 +80,7 @@ Edit the `<p>` tag to read `Hello again, world!` and save the file. Refresh the 
 
 Next, commit this change to your repo and push it:
 
-    $ git commit -am 'Add "Hello, again, world!"'
+    $ git commit -am 'Add "Hello again, world!"'
     $ git push origin master
 
 Run `docker ps` to get the `CONTAINER ID` and use `docker kill` to stop the container:
@@ -99,3 +99,19 @@ Push it to Docker Hub:
     $ docker push <yourname>/django-docker
 
 If you want, you can use the Docker Hub web interface to make this image private.
+
+## Deploying
+
+*This configuration isn't ready for production. Right now, data is stored in a local SQLite database. That database will be refreshed each time you update your Docker image. This configuration will be updated soon to store production data on a persistent storage backend (like Amazon RDS or Google Cloud SQL).*
+
+If you don't have a server running yet, start one. An easy and cheap option is the $5/month virtual server from Digital Ocean. They have Ubuntu images with Docker preinstalled.
+
+SSH to the server. Stop any running Docker containers. Then, pull the image you just pushed:
+
+    $ docker pull <yourname>/django-docker
+
+Run the image:
+
+    $ docker run -d -p 80:80 <yourname>/django-docker
+
+Point a browser to your server's IP address. You should see the latest version of the project.
