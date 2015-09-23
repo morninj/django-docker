@@ -17,7 +17,7 @@ Next, clone this repo:
 
 Update the `origin` to point to your own Git repo:
 
-    $ git remote set-url origin https://github.com/user/repo2.git
+    $ git remote set-url origin https://github.com/user/repo.git
 
 Build the Docker image (you should be in the `django-docker/` directory, which contains the `Dockerfile`):
 
