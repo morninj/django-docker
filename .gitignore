@@ -1,3 +1,4 @@
 *.swp
 *.pyc
 root_password
+production_secrets.ini
