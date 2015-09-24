@@ -4,7 +4,7 @@ This repo has everything you need to develop and deploy Django projects with Doc
 
 You can also pull this image from Docker Hub as [`morninj/django-docker`](https://hub.docker.com/r/morninj/django-docker/).
 
-I've tested this configuration on Mac OS X 10.10.3 and Ubuntu 14.04.
+This configuration uses Nginx, Gunicorn, and MySQL. I've tested it on Mac OS X 10.10.3 and Ubuntu 14.04.
 
 ## Get started
 
