@@ -82,7 +82,7 @@ Here's what the flags do:
 
 Point your browser to your Docker host's IP address. You should see the "Hello, world!" message again.
 
-Point your browser to http://<ip address>/admin/. You should be able to log in with username `root` and the root password you set earlier.
+Point your browser to `http://<ip address>/admin/`. You should be able to log in with username `root` and the root password you set earlier.
 
 In your editor of choice, open `django_docker/hello_world/templates/hello_world/index.html`. It looks like this:
 
