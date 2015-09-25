@@ -28,17 +28,24 @@ def deploy_production():
     print 'Pulling image on production host...'
     run('docker pull %s ' % parser.get('general', 'DOCKER_IMAGE_NAME'));
     print 'Running image on production host...'
-    # TODO below: set DJANGO_PRODUCTION=true
     run_command = '''docker run \
     -d \
     -p 80:80 \
-    --env DJANGO_PRODUCTION=false \
+    --env DJANGO_PRODUCTION=true \
     --env ROOT_PASSWORD={ROOT_PASSWORD} \
+    --env DATABASE_HOST={DATABASE_HOST} \
+    --env DATABASE_USERNAME={DATABASE_USERNAME} \
+    --env DATABASE_PASSWORD={DATABASE_PASSWORD} \
+    --env DATABASE_NAME={DATABASE_NAME} \
     {DOCKER_IMAGE_NAME}'''.format(
         ROOT_PASSWORD=parser.get('general', 'ROOT_PASSWORD'),
         DOCKER_IMAGE_NAME=parser.get('general', 'DOCKER_IMAGE_NAME'),
+        DATABASE_HOST=parser.get('production', 'DATABASE_HOST'),
+        DATABASE_USERNAME=parser.get('production', 'DATABASE_USERNAME'),
+        DATABASE_PASSWORD=parser.get('production', 'DATABASE_PASSWORD'),
+        DATABASE_NAME=parser.get('production', 'DATABASE_NAME'),
     )
-    run(run_command); # TODO define env variables in config.ini; set them here; and then grab them in settings_production.py
+    run(run_command);
     print '-' * 80
     print parser.get('general', 'DOCKER_IMAGE_NAME') + ' successfully deployed to ' + parser.get('production', 'HOST')
     print("Deployment time: %s seconds" % (time.time() - start_time))
