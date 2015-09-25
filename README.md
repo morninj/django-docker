@@ -29,8 +29,8 @@ Project settings live in `config.ini`. It contains sensitive data, so it's exclu
 
 Edit `config.ini`. At a minimum, change these settings:
 
-* `DOCKER_IMAGE_NAME`: change to `<yourname>/some-image-name`
-* `ROOT_PASSWORD`: this is the password for a Django superuser with username `root`
+* `DOCKER_IMAGE_NAME`: change to `<yourname>/some-image-name`.
+* `ROOT_PASSWORD`: this is the password for a Django superuser with username `root`. Change it to something secure.
 
 Build the Docker image (you should be in the `django-docker/` directory, which contains the `Dockerfile`):
 
