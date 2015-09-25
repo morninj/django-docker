@@ -5,6 +5,8 @@ DEBUG = False
 # The values below are loaded from environment variables
 import os
 
+SECRET_KEY = os.environ['SECRET_KEY']
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.

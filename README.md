@@ -21,6 +21,12 @@ Update the `origin` to point to your own Git repo:
 
     $ git remote set-url origin https://github.com/user/repo.git
 
+# Configure the project
+
+Project settings live in `config.ini`. It contains sensitive data, so it's excluded in `.gitignore` and `.dockerignore`. Copy `config.ini.sample` to `config.ini`:
+
+    $ cp config.ini.sample config.ini
+
 <!--
 # TODO set params, including root password, in config.ini
 # TODO add config.ini.sample; and add mv instructions

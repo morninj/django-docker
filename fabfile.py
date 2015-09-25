@@ -37,6 +37,7 @@ def deploy_production():
     --env DATABASE_USERNAME={DATABASE_USERNAME} \
     --env DATABASE_PASSWORD={DATABASE_PASSWORD} \
     --env DATABASE_NAME={DATABASE_NAME} \
+    --env SECRET_KEY={SECRET_KEY} \
     {DOCKER_IMAGE_NAME}'''.format(
         ROOT_PASSWORD=parser.get('general', 'ROOT_PASSWORD'),
         DOCKER_IMAGE_NAME=parser.get('general', 'DOCKER_IMAGE_NAME'),
@@ -44,6 +45,7 @@ def deploy_production():
         DATABASE_USERNAME=parser.get('production', 'DATABASE_USERNAME'),
         DATABASE_PASSWORD=parser.get('production', 'DATABASE_PASSWORD'),
         DATABASE_NAME=parser.get('production', 'DATABASE_NAME'),
+        SECRET_KEY=parser.get('production', 'SECRET_KEY'),
     )
     run(run_command);
     print '-' * 80
