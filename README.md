@@ -21,10 +21,11 @@ Update the `origin` to point to your own Git repo:
 
     $ git remote set-url origin https://github.com/user/repo.git
 
+<!--
 # TODO set params, including root password, in config.ini
 # TODO add config.ini.sample; and add mv instructions
-
 # TODO update entire doc with fab/config instructions
+-->
 
 Build the Docker image (you should be in the `django-docker/` directory, which contains the `Dockerfile`):
 
