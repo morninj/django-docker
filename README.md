@@ -4,7 +4,7 @@ This repo has everything you need to develop and deploy Django projects with Doc
 
 You can also pull this image from Docker Hub as [`morninj/django-docker`](https://hub.docker.com/r/morninj/django-docker/).
 
-This configuration uses Nginx, Gunicorn, and MySQL. I've tested it on Mac OS X 10.10.3 and Ubuntu 14.04.
+This configuration uses Nginx, Gunicorn, and MySQL. It uses Fabric for deployment with a single command. I've tested it on Mac OS X 10.10.3 and Ubuntu 14.04.
 
 ## Get started
 
@@ -27,9 +27,12 @@ Project settings live in `config.ini`. It contains sensitive data, so it's exclu
 
     $ cp config.ini.sample config.ini
 
+Edit `config.ini`. At a minimum, change these settings:
+
+* `DOCKER_IMAGE_NAME`: change to `<yourname>/some-image-name`
+* `ROOT_PASSWORD`: this is the password for a Django superuser with username `root`
+
 <!--
-# TODO set params, including root password, in config.ini
-# TODO add config.ini.sample; and add mv instructions
 # TODO update entire doc with fab/config instructions
 -->
 
@@ -68,18 +71,11 @@ You should be inside the `django-docker` folder, which contains the `Dockerfile`
 
 Here's the outline of the workflow:
 
-    1. Set a root password for the Django project
-    2. Run the Docker container and mount the local directory containing the Django project code
-    3. Make changes and test them on the container
-    4. Commit the changes to the Git repo
-    5. Rebuild the Docker image
-    6. Push the Docker image to Docker Hub
-
-Create a password for the Django project root user. This will be a Django user with superuser permissions and a username of `root`. Copy the sample file:
-
-    $ cp root_password.sample root_password
-
-Edit `root_password` and replace the contents with your root password. Make it strong and don't share it. (By default, the `.gitignore` file excludes `root_password` from the repo. If you don't want a Django superuser, you can comment out that line in the Dockerfile.)
+    1. Run the Docker container and mount the local directory containing the Django project code
+    2. Make changes and test them on the container
+    3. Commit the changes to the Git repo
+    4. Rebuild the Docker image
+    5. Push the Docker image to Docker Hub
 
 Start the Docker container:
 
@@ -94,7 +90,7 @@ Here's what the flags do:
 
 Point your browser to your Docker host's IP address. You should see the "Hello, world!" message again.
 
-Point your browser to `http://<ip address>/admin/`. You should be able to log in with username `root` and the root password you set earlier.
+Point your browser to `http://<ip address>/admin/`. You should be able to log in with username `root` and the root password you set in `config.ini`. 
 
 In your editor of choice, open `django_docker/hello_world/templates/hello_world/index.html`. It looks like this:
 
@@ -132,20 +128,24 @@ If you want, you can use the Docker Hub web interface to make this image private
 
 ## Deployment
 
-Production settings live in `django_docker/django_docker/settings_production.py`. Edit these as necessary. For instance, you'll probably want to set `ALLOWED_HOSTS` to your production domain, and you'll want to set `DATABASES` to a persistent storage backend (e.g., Google Cloud SQL or your own database server). See the [Django deployment checklist](https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/).
-
-It's a good idea to run the following steps on a staging server before running them on a production server. The staging server should be identical to the production server (except for its address).
-
 If you don't have a server running yet, start one. An easy and cheap option is the $5/month virtual server from Digital Ocean. They have Ubuntu images with Docker preinstalled.
 
-SSH to the server. Stop any running Docker containers. Then, pull the image you just pushed:
+You'll also need a separate database server. Two good options are Google Cloud SQL and Amazon RDS. 
 
-    $ docker pull <yourname>/django-docker
+<!-- TODO ssh to web server and create database -->
 
-Run the image:
+`config.ini` contains settings for production (e.g., the web server's IP address and the database details). Edit these values now.
 
-    $ docker run -d -p 80:80 <yourname>/django-docker
+If you want to enable addition production settings, you can add them to `django_docker/django_docker/settings_production.py`.
 
-Point a browser to your server's IP address. You should see the latest version of the project.
+<!-- TODO: move allowed_hosts to config.ini -->
+<!-- TODO check django deployment checxlist -->
+<!-- TODO make sure fabric is  installed-->
+
+The project can be deployed with a single Fabric command. Make sure Fabric is installed (do `pip install fabric`), and then run:
+
+    $ fab deploy_production
+
+This builds the Docker image, pushes it to Docker Hub, pulls it on the production server, and starts a container with the production settings.
 
 Verify that your production settings (not the development settings!) are active. Navigate to `http://<ip address>/spamalot`. You should see the basic Nginx "not found" page. If you see the full Django error page, that means that `DEBUG = True`, which probably means that your production settings are not loaded.
