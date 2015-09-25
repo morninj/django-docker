@@ -70,8 +70,6 @@ Here's the outline of the workflow:
     1. Run the Docker container and mount the local directory containing the Django project code
     2. Make changes and test them on the container
     3. Commit the changes to the Git repo
-    4. Rebuild the Docker image
-    5. Push the Docker image to Docker Hub
 
 Start the Docker container:
 
@@ -111,16 +109,6 @@ Run `docker ps` to get the `CONTAINER ID` and use `docker kill` to stop the cont
     CONTAINER ID        IMAGE                      COMMAND                  CREATED             STATUS              PORTS                          NAMES
     39b60b7eb954        <yourname>/django-docker   "/usr/bin/supervisord"   4 minutes ago       Up 3 minutes        0.0.0.0:80->80/tcp, 8000/tcp   elegant_banach
     $ docker kill 39b60b7eb954
-
-Rebuild the container with the updated code:
-
-    $ docker build -t <yourname>/django-docker .
-
-Push it to Docker Hub:
-
-    $ docker push <yourname>/django-docker
-
-If you want, you can use the Docker Hub web interface to make this image private.
 
 ## Deployment
 
