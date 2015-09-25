@@ -36,9 +36,9 @@ Build the Docker image (you should be in the `django-docker/` directory, which c
 
     $ docker build -t <yourname>/django-docker .
 
-Run the Docker image you just created:
+Run the Docker image you just created (the command will be explained in the `Development workflow` section below):
 
-    $ docker run -d -p 80:80 <yourname>/django-docker
+    $ docker run -d -p 80:80 -v $(pwd):/code --env DJANGO_PRODUCTION=false <yourname>/django-docker
 
 Run `docker ps` to verify that the Docker container is running:
 
