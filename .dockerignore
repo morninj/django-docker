@@ -3,3 +3,4 @@
 *.pyc
 config.ini
 supervisord.log
+supervisord.pid
