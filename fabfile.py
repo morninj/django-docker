@@ -6,8 +6,6 @@ parser = SafeConfigParser()
 parser.read(os.path.join(os.path.dirname(__file__), 'config.ini'))
 import time
 
-SECRET_KEY = parser.get('general', 'SECRET_KEY')
-
 # Configure server admin login credentials
 if parser.get('production', 'USE_PASSWORD'):
     env.password = parser.get('production', 'PASSWORD')
