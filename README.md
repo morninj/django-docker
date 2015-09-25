@@ -32,10 +32,6 @@ Edit `config.ini`. At a minimum, change these settings:
 * `DOCKER_IMAGE_NAME`: change to `<yourname>/some-image-name`
 * `ROOT_PASSWORD`: this is the password for a Django superuser with username `root`
 
-<!--
-# TODO update entire doc with fab/config instructions
--->
-
 Build the Docker image (you should be in the `django-docker/` directory, which contains the `Dockerfile`):
 
     $ docker build -t <yourname>/django-docker .
@@ -130,17 +126,11 @@ If you want, you can use the Docker Hub web interface to make this image private
 
 If you don't have a server running yet, start one. An easy and cheap option is the $5/month virtual server from Digital Ocean. They have Ubuntu images with Docker preinstalled.
 
-You'll also need a separate database server. Two good options are Google Cloud SQL and Amazon RDS. 
-
-<!-- TODO ssh to web server and create database -->
+You'll also need a separate database server. Two good options are Google Cloud SQL and Amazon RDS. Be sure to create a database named `django` (or anything else, as long as it matches `DATABASE_NAME` in `config.ini`). Also make sure to create a database user that can access this database. Finally, make sure that the production server is authorized to access the database server. (An easy way to verify all of this is to SSH to the production server and run `mysql -h <db server ip address> -uroot -p` and then `mysql> CREATE DATABASE django;`.)
 
 `config.ini` contains settings for production (e.g., the web server's IP address and the database details). Edit these values now.
 
 If you want to enable addition production settings, you can add them to `django_docker/django_docker/settings_production.py`.
-
-<!-- TODO: move allowed_hosts to config.ini -->
-<!-- TODO check django deployment checxlist -->
-<!-- TODO make sure fabric is  installed-->
 
 The project can be deployed with a single Fabric command. Make sure Fabric is installed (do `pip install fabric`), and then run:
 
