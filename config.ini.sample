@@ -1,0 +1,19 @@
+[general]
+DOCKER_IMAGE_NAME = morninj/django-docker
+ROOT_PASSWORD = root
+SECRET_KEY = putsomethingreallylonghere
+
+[production]
+HOST = 104.236.148.57           ; IP address of your production server
+USE_PASSWORD = false            ; false = use SSH key authentication; true = use password
+USERNAME = root
+PASSWORD = (empty)
+PUBLIC_KEY = ~/.ssh/id_dsa.pub  ; Your public SSH key
+DATABASE_HOST = 173.194.104.238         ; IP address of your database server
+DATABASE_USERNAME = root
+DATABASE_PASSWORD = rootpassword
+DATABASE_NAME = django
+
+
+
+# TODO remove unnecessary files
