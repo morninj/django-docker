@@ -24,7 +24,7 @@ fi
 # Initialize Django project
 python /code/django_docker/manage.py collectstatic --noinput
 python /code/django_docker/manage.py syncdb --noinput
-python /code/django_docker/manage.py makemigrations --noinput
+python /code/django_docker/manage.py makemigrations
 python /code/django_docker/manage.py migrate --noinput
 
 # Create a Django superuser named `root` if it doesn't yet exist

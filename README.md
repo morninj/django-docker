@@ -122,6 +122,21 @@ When you update your models, `django-docker` will automatically run `python mana
 - Don't delete the `migrations/` folders inside your apps (or else you'll have to do something like editing `initialize.sh` to add `migrate --fake-initial`—ugh)
 - When adding new model fields, remember to set a `default` (or else `migrate` will fail)
 
+Still, there will be times when you need to create migrations by hand. Django currently doesn't support fully automated migration creation—for instance, you might get a prompt like this:
+
+    Did you rename job.cost to job.paid (a IntegerField)? [y/N]
+
+As far as I know, this can't be automated. To handle this scenario, open a shell on your development Docker machine:
+
+    $ docker run -ti -p 80:80 -v $(pwd):/code --env DJANGO_PRODUCTION=false <yourname>/django-docker /bin/bash
+
+Then, start the database server and invoke `initialize.sh`:
+
+    $ /etc/init.d/mysql start
+    $ ./initialize.sh
+
+This will call `python manage.py makemigrations` and prompt you if necessary. It will create the necessary migration files. The migration will be automatically applied the next time you run the Docker image in production. (This can be scary. Make a clean backup of your code and database _before_ applying the migration in production in case you need to roll back.)
+
 ## Deployment
 
 If you don't have a server running yet, start one. An easy and cheap option is the $5/month virtual server from Digital Ocean. They have Ubuntu images with Docker preinstalled.
