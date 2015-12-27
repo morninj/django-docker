@@ -115,6 +115,13 @@ Run `docker ps` to get the `CONTAINER ID` and use `docker kill` to stop the cont
     39b60b7eb954        <yourname>/django-docker   "/usr/bin/supervisord"   4 minutes ago       Up 3 minutes        0.0.0.0:80->80/tcp, 8000/tcp   elegant_banach
     $ docker kill 39b60b7eb954
 
+### Updating models
+
+When you update your models, `django-docker` will automatically run `python manage.py makemigrations` and  `python manage.py migrate` the next time you run the Docker image. There are a few caveats:
+
+- Don't delete the `migrations/` folders inside your apps (or else you'll have to do something like editing `initialize.sh` to add `migrate --fake-initial`—ugh)
+- When adding new model fields, remember to set a `default` (or else `migrate` will fail)
+
 ## Deployment
 
 If you don't have a server running yet, start one. An easy and cheap option is the $5/month virtual server from Digital Ocean. They have Ubuntu images with Docker preinstalled.
