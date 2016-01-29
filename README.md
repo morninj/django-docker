@@ -1,10 +1,13 @@
 # django-docker
 
-This repo has everything you need to develop and deploy Django projects with Docker. If there's an improvement you'd like to see, feel free to add an issue or open a pull request.
+This is a production-ready setup for running Django on Docker.
 
-You can also pull this image from Docker Hub as [`morninj/django-docker`](https://hub.docker.com/r/morninj/django-docker/).
+## Quick start
 
-This configuration uses Nginx, Gunicorn, and MySQL. It uses Fabric for deployment with a single command. I've tested it on Mac OS X 10.10.3 and Ubuntu 14.04.
+    $ cp config.ini.sample config.ini # add your server details here
+    $ fab deploy_production
+
+That's it—you now have a fully Dockerized Django project running on a production server. Read below for details on configuring the project and managing the development workflow.
 
 ## Get started
 
@@ -16,6 +19,9 @@ Next, clone this repo:
     $ cd django-docker
 
 (Mac users should clone it to a directory under `/Users` because of a [Docker bug](https://blog.docker.com/2014/10/docker-1-3-signed-images-process-injection-security-options-mac-shared-directories/) involving Mac shared directories.)
+
+You can also fork this repo or pull it as  image from Docker Hub as [`morninj/django-docker`](https://hub.docker.com/r/morninj/django-docker/).
+
 
 Update the `origin` to point to your own Git repo:
 
