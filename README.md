@@ -151,7 +151,7 @@ You'll also need a separate database server. Two good options are Google Cloud S
 
 `config.ini` contains settings for production (e.g., the web server's IP address and the database details). Edit these values now.
 
-If you want to enable addition production settings, you can add them to `django_docker/django_docker/settings_production.py`.
+If you want to enable additional production settings, you can add them to `django_docker/django_docker/settings_production.py`.
 
 The project can be deployed with a single Fabric command. Make sure Fabric is installed (do `pip install fabric`), and then run:
 
