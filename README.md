@@ -9,7 +9,7 @@ This is a production-ready setup for running Django on Docker.
 
 That's it—you now have a fully Dockerized Django project running on a production server. Read below for details on configuring the project and managing the development workflow.
 
-## Get started
+## Installation
 
 First, [install Docker](https://docs.docker.com/installation/). If you're new to Docker, you might also want to check out the [Hello, world! tutorial](https://docs.docker.com/userguide/dockerizing/).
 
@@ -27,7 +27,7 @@ Update the `origin` to point to your own Git repo:
 
     $ git remote set-url origin https://github.com/user/repo.git
 
-# Configure the project
+## Configure the project
 
 Project settings live in `config.ini`. It contains sensitive data, so it's excluded in `.gitignore` and `.dockerignore`. Copy `config.ini.sample` to `config.ini`:
 
