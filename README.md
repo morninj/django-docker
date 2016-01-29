@@ -34,8 +34,8 @@ Edit `config.ini`. At a minimum, change these settings:
 
 Run `docker ps` to make sure your Docker host is running. If it's not, run:
 
-$ docker-machine start <dockerhostname>
-$ eval "$(docker-machine env <dockerhostname>)"
+    $ docker-machine start <dockerhostname>
+    $ eval "$(docker-machine env <dockerhostname>)"
 
 Build the Docker image (you should be in the `django-docker/` directory, which contains the `Dockerfile`):
 
