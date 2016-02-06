@@ -121,6 +121,16 @@ Run `docker ps` to get the `CONTAINER ID` and use `docker kill` to stop the cont
     39b60b7eb954        <yourname>/django-docker   "/usr/bin/supervisord"   4 minutes ago       Up 3 minutes        0.0.0.0:80->80/tcp, 8000/tcp   elegant_banach
     $ docker kill 39b60b7eb954
 
+### Editing files
+
+Unlike the Django development server, this configuration won't automatically detect and load changes in Python files. You'll have to manually refresh the server when you make changes (except for templates, which will automatically update). First, open a shell on the dev server:
+
+    $ docker exec -ti <CONTAINER ID> /bin/bash
+
+Then, each time you change a Python file, run:
+
+    $ supervisorctl restart gunicorn
+
 ### Updating models
 
 When you update your models, `django-docker` will automatically run `python manage.py makemigrations` and  `python manage.py migrate` the next time you run the Docker image. There are a few caveats:
