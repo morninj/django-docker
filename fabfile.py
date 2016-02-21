@@ -24,7 +24,7 @@ def deploy_production():
     run('if [ "$(docker ps -qa)" != "" ]; then docker rm --force `docker ps -qa`; fi')
     run('docker ps')
     print 'Removing dangling Docker images...'
-    run('docker rmi $(docker images -f "dangling=true" -q)')
+    run('if [ -z "$(docker images -f "dangling=true" -q)" ]; then echo "no images to remove";  else docker rmi $(docker images -f "dangling=true" -q); fi')
     print 'Pulling image on production host...'
     run('docker pull %s ' % parser.get('general', 'DOCKER_IMAGE_NAME'));
     print 'Running image on production host...'
