@@ -163,6 +163,8 @@ You'll also need a separate database server. Two good options are Google Cloud S
 
 If you want to enable additional production settings, you can add them to `django_docker/django_docker/settings_production.py`.
 
+If your repository is private on Docker Hub, you'll have to run `docker login` first on the remote host.
+
 The project can be deployed with a single Fabric command. Make sure Fabric is installed (do `pip install fabric`), and then run:
 
     $ fab deploy_production
