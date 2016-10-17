@@ -31,6 +31,7 @@ def deploy_production():
     run_command = '''docker run \
     -d \
     -p 80:80 \
+    -p 443:443 \
     --env DJANGO_PRODUCTION=true \
     --env ROOT_PASSWORD={ROOT_PASSWORD} \
     --env DATABASE_HOST={DATABASE_HOST} \
