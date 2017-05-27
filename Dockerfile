@@ -20,14 +20,13 @@ RUN apt-get update && apt-get install -y \
     python-dev \
     python-mysqldb \
     python-setuptools \
-    python-urllib3 \
     supervisor \
     vim
 RUN easy_install pip
 
 # Handle urllib3 InsecurePlatformWarning
 RUN apt-get install -y libffi-dev libssl-dev libpython2.7-dev
-RUN pip install requests[security] ndg-httpsclient pyasn1
+RUN pip install urllib3[security] requests[security] ndg-httpsclient pyasn1
 
 # Configure Django project
 ADD . /code
